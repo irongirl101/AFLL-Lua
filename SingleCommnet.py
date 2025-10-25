@@ -47,7 +47,7 @@ def p_error(p):
 parser = yacc.yacc()
 
 
-print("Enter '--content' (e.g., --hello-world). Press Ctrl+D (or Ctrl+Z on Windows) to exit.")
+
 while True:
     try:
         data = input("Enter Single Line: ")
