@@ -90,7 +90,7 @@ def p_error(p):
 
 parser = yacc.yacc()
 
-print("Lua Arithmetic Operators Parser (supports + - * / ^ and parentheses)")
+print("Operators Parser (supports + - * / ^ and parentheses)")
 while True:
     try:
         s = input("\nEnter expression (or 'exit' to quit): ")
@@ -106,3 +106,4 @@ while True:
         print("Invalid Expression:", e)
     except Exception as e:
         print("Unexpected Error:", e)
+
