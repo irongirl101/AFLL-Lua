@@ -1,4 +1,4 @@
-# Lua 'for' Loop Parser (Simplified form: for i = n)
+# Lua 'for' Loop Parser
 import ply.lex as lex
 import ply.yacc as yacc
 
@@ -60,3 +60,4 @@ while True:
         continue
 
     result = parser.parse(data)
+
