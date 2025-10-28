@@ -26,7 +26,7 @@ def t_NUMBER(t):
     t.value = float(t.value)
     return t
 
-# identifiers for 
+# identifiers  
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     return t
