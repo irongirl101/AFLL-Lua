@@ -1,13 +1,15 @@
-# Lua Operators Parser 
+# importing lexer and parser 
 import ply.lex as lex
 import ply.yacc as yacc
 
+# all the tokens
 tokens = (
     'NUMBER', 'IDENTIFIER',
     'PLUS', 'MINUS', 'TIMES', 'DIVIDE', 'POWER',
     'LPAREN', 'RPAREN'
 )
 
+ # tokens 
 t_PLUS   = r'\+'
 t_MINUS  = r'-'
 t_TIMES  = r'\*'
@@ -17,6 +19,7 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 
 t_ignore = ' \t'
+
 
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
