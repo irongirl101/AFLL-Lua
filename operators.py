@@ -20,12 +20,13 @@ t_RPAREN = r'\)'
 
 t_ignore = ' \t'
 
-
+# accepting only positive numbers 
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
     t.value = float(t.value)
     return t
 
+# identifiers for 
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
     return t

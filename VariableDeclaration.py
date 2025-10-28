@@ -1,6 +1,8 @@
+# importing lexer and parser 
 import ply.lex as lex
 import ply.yacc as yacc
 
+# 
 tokens = ('ID', 'COMMA', 'EQUAL', 'LOCAL', 'NUMBER')
 
 t_COMMA = r','
