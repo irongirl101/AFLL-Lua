@@ -94,3 +94,6 @@ while True:
     parsed = parser.parse(data, lexer=lexer)
     if parsed is not None:
         print("Accepted")
+
+
+    parser.parse(data, lexer=lexer)
