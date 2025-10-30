@@ -23,7 +23,7 @@ def t_IDENTIFIER(t):
  
 # tokenizing integer values 
 def t_NUMBER(t):
-    r'-\d+' # taking into account negative values as well 
+    r'-?\d+' # taking into account negative values as well 
     t.value = int(t.value)
     return t
 
