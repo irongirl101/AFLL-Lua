@@ -2,12 +2,12 @@
 import ply.lex as lex
 import ply.yacc as yacc
 # now we are only inputing integer types, and not float or any other data type. 
-
 # tokens 
 tokens = ('ID', 'COMMA', 'EQUAL', 'LOCAL', 'NUMBER')
 
 t_COMMA = r','
 t_EQUAL = r'='
+
 
 t_ignore = ' \t\n'
 
@@ -22,7 +22,7 @@ def t_ID(t):
     return t
 
 def t_NUMBER(t): 
-    r'-\d+' # accepting any integer 
+    r'-?\d+' # accepting any integer 
     t.value = int(t.value) # type casting 
     return t 
 
@@ -50,11 +50,25 @@ def p_local_declaration(p):
         p[0] = ('local_dec', p[2], None)
     else:
         # Case: local a, b = c, d
-        p[0] = ('local_dec', p[2], p[4])
+        # checking for semantic 
+        if len(p[2]) != len(p[4]):
+            # checking if everything before = is the same length as the everything after. -> this only works for integer values. 
+            print(f"Semantic Error: Mismatched assignment. "
+                  f"Got {len(p[2])} variables and {len(p[4])} values.")
+        else:
+            p[0] = ('local_dec', p[2], p[4])
+
 # CFG 
 def p_assignment(p):
     '''assignment : var_list EQUAL exp_list'''
-    p[0] = ('assignment', p[1], p[3])
+    # checking for semantics 
+    if len(p[1]) != len(p[3]):
+        print(f"Semantic Error: Mismatched assignment. "
+              f"Got {len(p[1])} variables and {len(p[3])} values.")
+        # Do not set p[0]
+    else:
+        p[0] = ('assignment', p[1], p[3])
+
 # CFG 
 def p_var_list(p):
     '''var_list : ID 
@@ -62,7 +76,8 @@ def p_var_list(p):
     if len(p) == 2:
         p[0] = [p[1]]
     else:
-        p[0] = [p[1]] + p[3]
+        p[0] = [p[1]] + p[3] 
+
 # CFG 
 def p_exp_list(p): 
     '''exp_list : expression
@@ -81,7 +96,8 @@ def p_expression(p):
 # error 
 def p_error(p):
     if p:
-        print(f"Syntax error at '{p.value}' (type: {p.type}) on line {p.lineno}")
+       
+        print(f"Syntax error at '{p.value}' (type: {p.type})")
     else:
         print("Syntax error at EOF")
 
@@ -98,9 +114,10 @@ while True:
     
     if not data:
         continue
+        
     parsed = parser.parse(data, lexer=lexer)
+    
     if parsed is not None:
-        print("Accepted")
+        print(f"Accepted.")
 
 
-    parser.parse(data, lexer=lexer)

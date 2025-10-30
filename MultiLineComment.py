@@ -55,8 +55,8 @@ def p_error(p):
 #parser 
 parser = yacc.yacc()
 
-print("Enter a multi-line comment (e.g., --[[ ... ]]).")
 while True:
+    print("Enter a multi-line comment (e.g., --[[ ... ]]).")
     lines = [] # adding all comment lines 
     while True:
         line = input()
@@ -69,7 +69,6 @@ while True:
     data = '\n'.join(lines)  
     parsed = parser.parse(data, lexer=lexer)
     if parsed is not None:
-        print("Accepted. Comment content:")
-        print(parsed)
+        print("Accepted.")
     else:
         print("Not accepted")
