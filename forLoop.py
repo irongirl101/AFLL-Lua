@@ -13,7 +13,7 @@ t_COMMA = r','
 t_EQUAL = r'='
 t_ignore = ' \t'
 
-
+# LEXER 
 # an identifier can be anything as long as its not for 
 def t_IDENTIFIER(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*' # it could be i, i9, _ etc etc -> a variable 
@@ -35,6 +35,7 @@ def t_error(t):
 # build lexer 
 lexer = lex.lex()
 
+# PARSER 
 # parser for for loop 
 def p_loop(p):
      # CFG for the loop (we are not considering do <statement> end)
@@ -58,7 +59,8 @@ parser = yacc.yacc()
 # show user an example 
 print("for Loop Parser (form: for i = n)")
 
-# continue asking for inputs till EOF 
+# MAIN 
+ch = "y"
 while True:
     try:
         data = input("Enter loop: ")
@@ -68,7 +70,11 @@ while True:
 
     if not data:
         print("Accepted")
-        continue
+        ch = input("Do you want to continue?")
+        if ch not in ['y','Y']: 
+            break
+        else:
+            continue
     # parse the data 
     result = parser.parse(data)
 

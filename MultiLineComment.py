@@ -10,6 +10,7 @@ states = (
 # multiline starts with --[[ end with ]]
 tokens = ('MULTILINE_START', 'MULTILINE_CONTENT', 'MULTILINE_END')
 
+# LEXER 
 def t_INITIAL_MULTILINE_START(t):
     r'--\[\[' # /-> for next line 
     t.type = 'MULTILINE_START' #  assigning token to --[[
@@ -40,7 +41,7 @@ def t_comment_error(t):
 #bulding lexer 
 lexer = lex.lex()
 
-#Parser 
+#PARSER
 def p_multiline_comment(p):
     '''S : MULTILINE_START MULTILINE_CONTENT MULTILINE_END''' # CFG 
     p[0] = p[2] # multiple lines 
@@ -52,9 +53,10 @@ def p_error(p):
     else:
         print("Syntax error at EOF")
 
-#parser 
+
 parser = yacc.yacc()
 
+# MAIN 
 while True:
     print("Enter a multi-line comment (e.g., --[[ ... ]]).")
     lines = [] # adding all comment lines 
@@ -70,5 +72,10 @@ while True:
     parsed = parser.parse(data, lexer=lexer)
     if parsed is not None:
         print("Accepted.")
+        ch = input("Do you want to continue?")
+        if ch not in ['y','Y']: 
+            break
+        else:
+            continue
     else:
         print("Not accepted")

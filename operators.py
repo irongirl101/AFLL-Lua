@@ -20,6 +20,7 @@ t_RPAREN = r'\)'
 
 t_ignore = ' \t'
 
+# LEXER 
 # accepting only positive numbers 
 def t_NUMBER(t):
     r'\d+(\.\d+)?'
@@ -45,6 +46,7 @@ precedence = (
     ('left', 'PLUS', 'MINUS'),
 )
 
+# PARSER 
 def p_expression_plus_minus(p):
     '''expression : expression PLUS term
                   | expression MINUS term'''
@@ -94,6 +96,7 @@ def p_error(p):
 
 parser = yacc.yacc()
 
+# MAIN 
 print("Operators Parser (supports + - * / ^ and parentheses)")
 while True:
     try:

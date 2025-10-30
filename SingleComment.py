@@ -13,7 +13,7 @@ states = (('content', 'exclusive'),)
 #tokens 
 tokens = ('DOUBLE_HYPHEN', 'CONTENT')
 
-
+# LEXER 
 def t_INITIAL_DOUBLE_HYPHEN(t):
     r'--'
     t.type = 'DOUBLE_HYPHEN' #assigning '--' to double hyphen token 
@@ -37,9 +37,11 @@ def t_content_error(t):
     print(f"[content] Illegal character '{t.value[0]}' on line {t.lexer.lineno}")
     t.lexer.skip(1)
 
-# lexer 
+ 
 lexer = lex.lex()
 
+
+# PARSER 
 # CFG for sequence 
 def p_sequence(p):
     '''S : DOUBLE_HYPHEN CONTENT'''
@@ -54,7 +56,7 @@ def p_error(p):
 # parser build 
 parser = yacc.yacc()
 
-# main
+# MAIN
 while True:
     try:
         data = input("Enter Single Line: ")
@@ -68,4 +70,9 @@ while True:
     parsed = parser.parse(data, lexer=lexer) # parse wrt to lexer 
     if parsed is not None:
         print("Accepted")
+        ch = input("Do you want to continue?")
+        if ch not in ['y','Y']: 
+            break
+        else:
+            continue
 

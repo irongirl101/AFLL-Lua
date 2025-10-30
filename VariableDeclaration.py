@@ -16,6 +16,7 @@ reserved = {
     'local': 'LOCAL'
 }
 
+# LEXER 
 def t_ID(t): 
     r'[a-zA-Z_][a-zA-Z_0-9]*' # token can accept anything 
     t.type = reserved.get(t.value, 'ID') # add ID tag 
@@ -34,6 +35,8 @@ def t_error(t):
 # building lexer 
 lexer = lex.lex()
 
+
+# PARSER 
 # CFG 
 def p_statement(p):
     '''statement : local_declaration
@@ -104,6 +107,7 @@ def p_error(p):
 #building parser 
 parser = yacc.yacc()
 
+ch = "y"
 # main
 while True:
     try:
@@ -119,5 +123,10 @@ while True:
     
     if parsed is not None:
         print(f"Accepted.")
+        ch = input("Do you want to continue?")
+        if ch not in ['y','Y']: 
+            break
+        else:
+            continue
 
 
