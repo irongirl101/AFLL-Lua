@@ -7,7 +7,7 @@ import ply.yacc as yacc
 
 # states
 # why have states? -> well, in the initial stage, you are looking for only --, and you should have a CFG for the content added as well. so 
-# you must change to the content stage, which is exclusive of the initial state, for that parse. 
+# you must change to the content state, which is exclusive of the initial state, for that parse. 
 states = (('content', 'exclusive'),)
 
 #tokens 
