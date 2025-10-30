@@ -1,7 +1,7 @@
 # importing lexer and parser 
 import ply.lex as lex
 import ply.yacc as yacc
-# not we are only inputing integer types, and not float or any other data type. 
+# now we are only inputing integer types, and not float or any other data type. 
 
 # tokens 
 tokens = ('ID', 'COMMA', 'EQUAL', 'LOCAL', 'NUMBER')
