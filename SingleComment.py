@@ -25,7 +25,7 @@ def t_INITIAL_error(t):
     print(f"[INITIAL] Illegal character '{t.value[0]}' on line {t.lexer.lineno}")
     t.lexer.skip(1)
 
-# t for content 
+# t for content --
 def t_content_CONTENT(t):
     r'.+' # content can accept anything. 
     t.type = 'CONTENT' # assign 
